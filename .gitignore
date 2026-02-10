@@ -1,0 +1,10 @@
+# Angular
+ems-ui/node_modules/
+ems-ui/dist/
+
+# .NET
+ems.api/bin/
+ems.api/obj/
+*.user
+*.vs
+appsettings*.json
