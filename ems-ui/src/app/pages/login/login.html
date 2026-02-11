@@ -1,0 +1,23 @@
+<h2>Login</h2>
+
+<div *ngIf="sessionExpired" style="color: red; margin-bottom: 10px;">
+  Session expired. Please login again.
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <div>
+    <label>Username</label>
+    <input formControlName="user" />
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input type="password" formControlName="pass" />
+  </div>
+
+  <button type="submit">Login</button>
+</form>
+
+<div *ngIf="error" style="color: red; margin-top: 10px;">
+  {{ error }}
+</div>

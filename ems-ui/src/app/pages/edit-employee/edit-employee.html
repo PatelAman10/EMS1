@@ -1,0 +1,20 @@
+<h2>Edit Employee</h2>
+<p>Editing employee ID: {{ employeeId }}</p>
+
+<form [formGroup]="employeeForm" (ngSubmit)="update()">
+  <label>
+    Name:
+    <input formControlName="name" />
+  </label>
+
+  <br /><br />
+
+  <label>
+    Role:
+    <input formControlName="role" />
+  </label>
+
+  <br /><br />
+
+  <button type="submit">Update</button>
+</form>
