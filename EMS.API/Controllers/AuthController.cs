@@ -16,11 +16,11 @@ namespace EMS.API.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] User user)
+        public IActionResult Login([FromBody] LoginDto user)
         {
-            if (user.Username == "admin" && user.Password == "admin123")
+            if (user.username == "admin" && user.password == "admin123")
             {
-                var token = _jwt.GenerateToken(user.Username);
+                var token = _jwt.GenerateToken("admin");
                 return Ok(new { token });
             }
 

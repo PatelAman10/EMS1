@@ -41,7 +41,7 @@ namespace EMS.API.Controllers
 
             emp.Name = updated.Name;
             emp.Email = updated.Email;
-            emp.Department = updated.Department;
+            emp.Role = updated.Role;
             emp.Salary = updated.Salary;
 
             return Ok(emp);

@@ -1,4 +1,4 @@
-<h2>Employees</h2>
+<!-- <h2>Employees</h2>
 
 <button (click)="goToAdd()">Add Employee</button>
 <button (click)="logout()">Logout</button>
@@ -28,4 +28,35 @@
       </td>
     </tr>
   </ng-container>
+</table>
+ -->
+<h2>Employees</h2>
+
+<button (click)="goToAdd()">Add Employee</button>
+<button (click)="logout()">Logout</button>
+
+<!-- Countdown section stays untouched -->
+<ng-container *ngIf="countdown$ | async as c">
+  <div *ngIf="c > 0" style="color: red; margin-top: 10px;">
+    Session expiring in {{ c }} seconds...
+  </div>
+</ng-container>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Role</th>
+    <th>Action</th>
+  </tr>
+
+  <tr *ngFor="let emp of employees">
+    <td>{{ emp.id }}</td>
+    <td>{{ emp.name }}</td>
+    <td>{{ emp.role }}</td>
+    <td>
+      <button (click)="editEmployee(emp.id)">Edit</button>
+      <button (click)="deleteEmployee(emp.id)">Delete</button>
+    </td>
+  </tr>
 </table>

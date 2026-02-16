@@ -1,40 +1,31 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Employee } from '../models/employee.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class EmployeeService {
-  private employees = new BehaviorSubject<Employee[]>([
-    { id: 1, name: 'MS Dhoni', role: 'Boss' },
-    { id: 2, name: 'Virat Kohli', role: 'Manager' },
-  ]);
+  private apiUrl = 'http://localhost:5136/api/employees';
 
-  employees$ = this.employees.asObservable();
+  constructor(private http: HttpClient) {}
 
-  addEmployee(emp: Omit<Employee, 'id'>) {
-    const current = this.employees.value;
-    const newEmp: Employee = {
-      id: current.length + 1,
-      ...emp,
-    };
-    this.employees.next([...current, newEmp]);
+  getEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.apiUrl);
   }
 
-  updateEmployee(id: number, data: Partial<Employee>) {
-    const updated = this.employees.value.map((e) =>
-      e.id === id ? { ...e, ...data } : e
-    );
-    this.employees.next(updated);
+  getEmployee(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
   }
 
-  deleteEmployee(id: number) {
-    const updated = this.employees.value.filter((e) => e.id !== id);
-    this.employees.next(updated);
+  addEmployee(emp: Omit<Employee, 'id'>): Observable<Employee> {
+    return this.http.post<Employee>(this.apiUrl, emp);
   }
 
-  getEmployee(id: number) {
-    return this.employees.value.find((e) => e.id === id);
+  updateEmployee(id: number, emp: Omit<Employee, 'id'>): Observable<Employee> {
+    return this.http.put<Employee>(`${this.apiUrl}/${id}`, emp);
+  }
+
+  deleteEmployee(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

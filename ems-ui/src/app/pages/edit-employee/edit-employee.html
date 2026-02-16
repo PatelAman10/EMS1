@@ -6,6 +6,9 @@
     Name:
     <input formControlName="name" />
   </label>
+  <div *ngIf="employeeForm.get('name')?.touched && employeeForm.get('name')?.invalid">
+    Name is required
+  </div>
 
   <br /><br />
 
@@ -13,6 +16,29 @@
     Role:
     <input formControlName="role" />
   </label>
+  <div *ngIf="employeeForm.get('role')?.touched && employeeForm.get('role')?.invalid">
+    Role is required
+  </div>
+
+  <br /><br />
+
+  <label>
+    Email:
+    <input formControlName="email" type="email" />
+  </label>
+  <div *ngIf="employeeForm.get('email')?.touched && employeeForm.get('email')?.invalid">
+    Email is required
+  </div>
+
+  <br /><br />
+
+  <label>
+    Salary:
+    <input formControlName="salary" type="number" />
+  </label>
+  <div *ngIf="employeeForm.get('salary')?.touched && employeeForm.get('salary')?.invalid">
+    Salary is required
+  </div>
 
   <br /><br />
 

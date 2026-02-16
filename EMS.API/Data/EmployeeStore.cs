@@ -6,8 +6,8 @@ namespace EMS.API.Data
     {
         public static List<Employee> Employees = new()
         {
-            new Employee { Id = 1, Name = "John", Email = "john@test.com", Department = "HR", Salary = 30000 },
-            new Employee { Id = 2, Name = "Sara", Email = "sara@test.com", Department = "IT", Salary = 50000 }
+            new Employee { Id = 1, Name = "MS Dhoni", Email = "msd07@test.com", Role = "Boss", Salary = 600000 },
+            new Employee { Id = 2, Name = "Virat Kohli", Email = "vk18@test.com", Role = "Manager", Salary = 550000 }
         };
     }
 }
