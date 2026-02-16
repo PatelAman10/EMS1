@@ -1,9 +1,13 @@
+using EMS.API.Data;
 using EMS.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// ------------------ Services ------------------ //
 
 // Controllers & Swagger
 builder.Services.AddControllers();
@@ -45,6 +49,12 @@ builder.Services.AddAuthentication(options =>
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
+
+// ✅ PostgreSQL DbContext registration
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// ------------------ Build App ------------------ //
 
 var app = builder.Build();
 

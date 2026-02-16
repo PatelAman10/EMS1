@@ -1,6 +1,7 @@
 using EMS.API.Data;
 using EMS.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EMS.API.Controllers
 {
@@ -8,35 +9,44 @@ namespace EMS.API.Controllers
     [Route("api/[controller]")]
     public class EmployeesController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult GetAll()
+        private readonly AppDbContext _context;
+
+        public EmployeesController(AppDbContext context)
         {
-            return Ok(EmployeeStore.Employees);
+            _context = context;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        // GET: api/employees
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-            var emp = EmployeeStore.Employees.FirstOrDefault(e => e.Id == id);
+            var employees = await _context.Employees.ToListAsync();
+            return Ok(employees);
+        }
+
+        // GET: api/employees/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var emp = await _context.Employees.FindAsync(id);
             if (emp == null) return NotFound();
             return Ok(emp);
         }
 
+        // POST: api/employees
         [HttpPost]
-        public IActionResult Add(Employee employee)
+        public async Task<IActionResult> Add(Employee employee)
         {
-            employee.Id = EmployeeStore.Employees.Any()
-                ? EmployeeStore.Employees.Max(e => e.Id) + 1
-                : 1;
-
-            EmployeeStore.Employees.Add(employee);
-            return Ok(employee);
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetById), new { id = employee.Id }, employee);
         }
 
+        // PUT: api/employees/5
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Employee updated)
+        public async Task<IActionResult> Update(int id, Employee updated)
         {
-            var emp = EmployeeStore.Employees.FirstOrDefault(e => e.Id == id);
+            var emp = await _context.Employees.FindAsync(id);
             if (emp == null) return NotFound();
 
             emp.Name = updated.Name;
@@ -44,17 +54,20 @@ namespace EMS.API.Controllers
             emp.Role = updated.Role;
             emp.Salary = updated.Salary;
 
+            await _context.SaveChangesAsync();
             return Ok(emp);
         }
 
+        // DELETE: api/employees/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var emp = EmployeeStore.Employees.FirstOrDefault(e => e.Id == id);
+            var emp = await _context.Employees.FindAsync(id);
             if (emp == null) return NotFound();
 
-            EmployeeStore.Employees.Remove(emp);
-            return Ok();
+            _context.Employees.Remove(emp);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
