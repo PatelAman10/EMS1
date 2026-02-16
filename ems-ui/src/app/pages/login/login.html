@@ -1,23 +1,47 @@
-<h2>Login</h2>
+<div class="login-theme-wrapper" [ngClass]="currentTheme + '-theme'">
 
-<div *ngIf="sessionExpired" style="color: red; margin-bottom: 10px;">
-  Session expired. Please login again.
-</div>
-
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <div>
-    <label>Username</label>
-    <input formControlName="user" />
+  <div class="login-left-side">
+    <!-- You can replace this with your brand image or logo -->
+    <h1>Welcome Back!</h1>
+    <p>Sign in to access your dashboard and start managing your team.</p>
   </div>
 
-  <div>
-    <label>Password</label>
-    <input type="password" formControlName="pass" />
+  <div class="login-container">
+
+    <h2>Login</h2>
+
+    <div *ngIf="sessionExpired" class="error-message">
+      Session expired. Please login again.
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <label>Username</label>
+      <input formControlName="user" placeholder="Enter your username" />
+
+      <label>Password</label>
+      <input type="password" formControlName="pass" placeholder="Enter your password" />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
   </div>
 
-  <button type="submit">Login</button>
-</form>
+  <!-- Theme selector corner -->
+  <div class="theme-selector">
+    Theme:
+    <select [(ngModel)]="currentTheme">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="colorful">Colorful</option>
+    </select>
+  </div>
 
-<div *ngIf="error" style="color: red; margin-top: 10px;">
-  {{ error }}
+  <!-- Footer copyright -->
+  <footer class="login-footer">
+    <em> © 2026 AuspX — All rights reserved </em>
+  </footer>
 </div>

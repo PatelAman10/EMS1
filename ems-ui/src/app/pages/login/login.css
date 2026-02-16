@@ -1,0 +1,258 @@
+/* ====== Layout Wrapper ====== */
+.login-theme-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.3s ease;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+/* ====== Left Side (Welcome / Image) ====== */
+.login-left-side {
+  flex: 1 1 50%;
+  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+  color: white;
+  padding: 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-shadow: 0 0 8px rgba(0,0,0,0.4);
+  min-width: 300px;
+}
+
+.login-left-side h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.login-left-side p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+/* ====== Login Container ====== */
+.login-container {
+  flex: 1 1 50%;
+  max-width: 450px;
+  background: rgba(255 255 255 / 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 3rem 2.5rem;
+  margin: auto 3rem auto 1.5rem;
+  box-shadow: 0 15px 30px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  color: #1f2937;
+  transition: background 0.3s ease, color 0.3s ease;
+  min-width: 320px;
+}
+
+.login-container h2 {
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.login-container label {
+  display: block;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  color: #374151;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+  color: #1f2937;
+  background: white;
+}
+
+.login-container input::placeholder {
+  color: #9ca3af;
+}
+
+.login-container input:focus {
+  border-color: #4f46e5;
+  outline: none;
+  box-shadow: 0 0 6px #4f46e5aa;
+}
+
+.login-container button {
+  padding: 12px 0;
+  background-color: #4f46e5;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.login-container button:hover {
+  background-color: #4338ca;
+}
+
+/* Error messages */
+.error-message {
+  color: #dc2626;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+/* ====== Theme Selector ====== */
+.theme-selector {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 0.9rem;
+  user-select: none;
+  color: #4b5563;
+  z-index: 1000;
+}
+
+.theme-selector select {
+  margin-left: 6px;
+  padding: 3px 6px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-selector select:hover {
+  background-color: #e2e8f0;
+}
+
+/* ====== Footer ====== */
+.login-footer {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-style: italic;
+  user-select: none;
+}
+
+/* ====== Dark Theme ====== */
+.dark-theme {
+  background: #0f172a;
+}
+
+.dark-theme .login-left-side {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #e0e7ff;
+  text-shadow: none;
+}
+
+.dark-theme .login-container {
+  background: rgba(31 41 55 / 0.8);
+  color: #e0e7ff;
+}
+
+.dark-theme label {
+  color: #cbd5e1;
+}
+
+.dark-theme input {
+  background: #1e293b;
+  color: #e0e7ff;
+  border: 1.5px solid #4b5563;
+}
+
+.dark-theme input::placeholder {
+  color: #94a3b8;
+}
+
+.dark-theme .error-message {
+  color: #f87171;
+}
+
+.dark-theme .theme-selector {
+  color: #94a3b8;
+}
+
+.dark-theme .theme-selector select:hover {
+  background-color: #334155;
+}
+
+/* ====== Colorful Theme ====== */
+.colorful-theme {
+  background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+}
+
+.colorful-theme .login-left-side {
+  background: linear-gradient(135deg, #ff6a88 0%, #ff99ac 100%);
+  color: #3b021f;
+  text-shadow: none;
+}
+
+.colorful-theme .login-container {
+  background: rgba(255 255 255 / 0.95);
+  color: #3b021f;
+}
+
+.colorful-theme label {
+  color: #7f1d1d;
+}
+
+.colorful-theme input {
+  background: #fff0f6;
+  color: #3b021f;
+  border: 1.5px solid #f43f5e;
+}
+
+.colorful-theme input::placeholder {
+  color: #f87171;
+}
+
+.colorful-theme .error-message {
+  color: #b91c1c;
+}
+
+.colorful-theme .theme-selector {
+  color: #7f1d1d;
+}
+
+.colorful-theme .theme-selector select:hover {
+  background-color: #fee2e2;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 900px) {
+  .login-theme-wrapper {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .login-left-side,
+  .login-container {
+    flex: none;
+    max-width: 100%;
+    margin: 0 0 2rem 0;
+    border-radius: 12px;
+  }
+
+  .login-left-side {
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+}

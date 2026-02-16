@@ -1,62 +1,54 @@
-<!-- <h2>Employees</h2>
+<div class="employees-page" [ngClass]="currentTheme">
 
-<button (click)="goToAdd()">Add Employee</button>
-<button (click)="logout()">Logout</button>
-
-<ng-container *ngIf="countdown$ | async as c">
-  <div *ngIf="c > 0" style="color: red; margin-top: 10px;">
-    Session expiring in {{ c }} seconds...
+  <!-- Top navigation / header -->
+  <div class="header-bar">
+    <h2>Employees</h2>
+    <div class="header-controls">
+      <button class="btn primary" (click)="goToAdd()">Add Employee</button>
+      <button class="btn danger" (click)="logout()">Logout</button>
+      <select [(ngModel)]="currentTheme" class="theme-selector">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="colorful">Colorful</option>
+      </select>
+    </div>
   </div>
-</ng-container>
 
-<table border="1" cellpadding="10" cellspacing="0">
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Role</th>
-    <th>Action</th>
-  </tr>
-
-  <ng-container *ngIf="employees$ | async as employees">
-    <tr *ngFor="let emp of employees">
-      <td>{{ emp.id }}</td>
-      <td>{{ emp.name }}</td>
-      <td>{{ emp.role }}</td>
-      <td>
-        <button (click)="editEmployee(emp.id)">Edit</button>
-        <button (click)="deleteEmployee(emp.id)">Delete</button>
-      </td>
-    </tr>
+  <!-- Countdown -->
+  <ng-container *ngIf="countdown$ | async as c">
+    <div *ngIf="c > 0" class="countdown-warning">
+      Session expiring in {{ c }} seconds...
+    </div>
   </ng-container>
-</table>
- -->
-<h2>Employees</h2>
 
-<button (click)="goToAdd()">Add Employee</button>
-<button (click)="logout()">Logout</button>
-
-<!-- Countdown section stays untouched -->
-<ng-container *ngIf="countdown$ | async as c">
-  <div *ngIf="c > 0" style="color: red; margin-top: 10px;">
-    Session expiring in {{ c }} seconds...
+  <!-- Table container -->
+  <div class="table-card">
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>{{ emp.id }}</td>
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.role }}</td>
+          <td>
+            <button class="btn edit-btn" (click)="editEmployee(emp.id)">Edit</button>
+            <button class="btn delete-btn" (click)="deleteEmployee(emp.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</ng-container>
 
-<table border="1" cellpadding="10" cellspacing="0">
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Role</th>
-    <th>Action</th>
-  </tr>
+  <!-- Footer -->
+  <footer class="footer">
+    <small><i><!-- © 2026 Your Company Name Here --></i></small>
+  </footer>
 
-  <tr *ngFor="let emp of employees">
-    <td>{{ emp.id }}</td>
-    <td>{{ emp.name }}</td>
-    <td>{{ emp.role }}</td>
-    <td>
-      <button (click)="editEmployee(emp.id)">Edit</button>
-      <button (click)="deleteEmployee(emp.id)">Delete</button>
-    </td>
-  </tr>
-</table>
+</div>

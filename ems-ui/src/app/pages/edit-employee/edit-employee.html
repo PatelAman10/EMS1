@@ -1,46 +1,121 @@
-<h2>Edit Employee</h2>
-<p>Editing employee ID: {{ employeeId }}</p>
+<!-- <div class="form-container">
 
-<form [formGroup]="employeeForm" (ngSubmit)="update()">
-  <label>
-    Name:
-    <input formControlName="name" />
-  </label>
-  <div *ngIf="employeeForm.get('name')?.touched && employeeForm.get('name')?.invalid">
-    Name is required
+  <h2>Edit Employee</h2>
+  <p class="employee-id">Editing employee ID: {{ employeeId }}</p>
+
+  <form [formGroup]="employeeForm" (ngSubmit)="update()">
+
+    <div class="form-group">
+      <label>Name</label>
+      <input formControlName="name" />
+      <div class="error"
+           *ngIf="employeeForm.get('name')?.touched && employeeForm.get('name')?.invalid">
+        Name is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Role</label>
+      <input formControlName="role" />
+      <div class="error"
+           *ngIf="employeeForm.get('role')?.touched && employeeForm.get('role')?.invalid">
+        Role is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+      <div class="error"
+           *ngIf="employeeForm.get('email')?.touched && employeeForm.get('email')?.invalid">
+        Valid email is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Salary</label>
+      <input type="number" formControlName="salary" />
+      <div class="error"
+           *ngIf="employeeForm.get('salary')?.touched && employeeForm.get('salary')?.invalid">
+        Salary must be 0 or more
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="button" class="back-btn" routerLink="/employees">
+        Back
+      </button>
+
+      <button type="submit" [disabled]="employeeForm.invalid">
+        Update
+      </button>
+    </div>
+
+  </form>
+
+</div>
+ -->
+
+ <div class="employees-page" [ngClass]="currentTheme">
+
+  <!-- Header bar -->
+  <div class="header-bar">
+    <h2>Edit Employee</h2>
+    <div class="header-controls">
+      <button class="btn danger" (click)="goBack()">Back</button>
+      <select [(ngModel)]="currentTheme" class="theme-selector">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="colorful">Colorful</option>
+      </select>
+    </div>
   </div>
 
-  <br /><br />
+  <!-- Employee card -->
+  <div class="table-card">
+    <p>Editing employee ID: {{ employeeId }}</p>
 
-  <label>
-    Role:
-    <input formControlName="role" />
-  </label>
-  <div *ngIf="employeeForm.get('role')?.touched && employeeForm.get('role')?.invalid">
-    Role is required
+    <form [formGroup]="employeeForm" (ngSubmit)="update()">
+
+      <div class="form-group">
+        <label>Name:</label>
+        <input formControlName="name" />
+        <div *ngIf="employeeForm.get('name')?.touched && employeeForm.get('name')?.invalid" class="error">
+          Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Role:</label>
+        <input formControlName="role" />
+        <div *ngIf="employeeForm.get('role')?.touched && employeeForm.get('role')?.invalid" class="error">
+          Role is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" formControlName="email" />
+        <div *ngIf="employeeForm.get('email')?.touched && employeeForm.get('email')?.invalid" class="error">
+          Email is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Salary:</label>
+        <input type="number" formControlName="salary" />
+        <div *ngIf="employeeForm.get('salary')?.touched && employeeForm.get('salary')?.invalid" class="error">
+          Salary is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn primary">Update</button>
+    </form>
   </div>
 
-  <br /><br />
+  <!-- Footer -->
+  <footer class="footer">
+    <small><i><!-- © 2026 Your Company Name Here --></i></small>
+  </footer>
 
-  <label>
-    Email:
-    <input formControlName="email" type="email" />
-  </label>
-  <div *ngIf="employeeForm.get('email')?.touched && employeeForm.get('email')?.invalid">
-    Email is required
-  </div>
-
-  <br /><br />
-
-  <label>
-    Salary:
-    <input formControlName="salary" type="number" />
-  </label>
-  <div *ngIf="employeeForm.get('salary')?.touched && employeeForm.get('salary')?.invalid">
-    Salary is required
-  </div>
-
-  <br /><br />
-
-  <button type="submit">Update</button>
-</form>
+</div>

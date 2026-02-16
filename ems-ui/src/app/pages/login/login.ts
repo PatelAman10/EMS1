@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.html',
-  imports: [CommonModule, ReactiveFormsModule],
+  styleUrl: './login.css',
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
 })
 export class Login {
   private fb = inject(FormBuilder);
@@ -24,6 +26,9 @@ export class Login {
   error = '';
   sessionExpired = false;
 
+  // Theme state
+  currentTheme: 'light' | 'dark' | 'colorful' = 'light';
+
   ngOnInit() {
     const params = this.route.snapshot.queryParams;
     if (params['sessionExpired'] === 'true') {
@@ -31,23 +36,17 @@ export class Login {
     }
   }
 
-login() {
-  const user = this.loginForm.value.user!;
-  const pass = this.loginForm.value.pass!;
+  login() {
+    const user = this.loginForm.value.user!;
+    const pass = this.loginForm.value.pass!;
 
-  console.log('LOGIN CLICKED', user, pass);
-
-  this.auth.login(user, pass).subscribe({
-    next: (res) => {
-      console.log('LOGIN SUCCESS', res);
-      this.router.navigate(['/employees']);
-    },
-    error: (err) => {
-      console.log('LOGIN ERROR', err);
-      this.error = 'Invalid credentials';
-    }
-  });
-}
-
-
+    this.auth.login(user, pass).subscribe({
+      next: (res) => {
+        this.router.navigate(['/employees']);
+      },
+      error: (err) => {
+        this.error = 'Invalid credentials';
+      },
+    });
+  }
 }
