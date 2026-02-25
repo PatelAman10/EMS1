@@ -37,6 +37,9 @@ export class Login {
   }
 
   login() {
+    if (this.loginForm.invalid) {
+    return;
+  }
     const user = this.loginForm.value.user!;
     const pass = this.loginForm.value.pass!;
 
