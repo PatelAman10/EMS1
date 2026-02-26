@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:5136/api/auth';
+  private readonly apiUrl = 'http://localhost:5277/api/auth';
 
   private readonly sessionDurationMs = 30 * 1000; // 30 seconds
   private readonly warningSeconds = 7;

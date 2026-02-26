@@ -8,7 +8,7 @@ describe('AuthService Unit Tests', () => {
   let httpMock: HttpTestingController;
   let routerSpy: jasmine.SpyObj<Router>;
 
-  const apiUrl = 'http://localhost:5136/api/auth';
+  const apiUrl = 'http://localhost:5277/api/auth';
 
   beforeEach(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
